@@ -26,4 +26,11 @@ urlpatterns = [
     path('edit/ambito/<int:id>',views.edit_ambito),
     path('update/ambito/<int:id>',views.update_ambito),
     path('delete/ambito/<int:id>',views.delete_ambito),
+    path('index/tipo_objetivo', views.index_tipo_objetivo),
+    path('show/tipo_objetivo/<int:id>', views.show_tipo_objetivo),
+    path('new/tipo_objetivo', views.new_tipo_objetivo),
+    path('create/tipo_objetivo', views.create_tipo_objetivo),
+    path('edit/tipo_objetivo/<int:id>', views.edit_tipo_objetivo),
+    path('update/tipo_objetivo/<int:id>', views.update_tipo_objetivo),
+    path('delete/tipo_objetivo/<int:id>', views.delete_tipo_objetivo),
 ]

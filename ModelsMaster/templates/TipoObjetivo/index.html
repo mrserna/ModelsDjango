@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Tipo Objetivo</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/tipo_objetivo">Crear un nuevo Tipo objetivo</a>
+        {% if tipos_objetivos %}
+            {% for tipo_objetivo in tipos_objetivos %}
+                <h2>ID: {{tipo_objetivo.id_Tipo_Objetivo}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{tipo_objetivo.Str_Nombre}}</p>
+                <a href="/show/tipo_objetivo/{{tipo_objetivo.id_Tipo_Objetivo}}">para ver el tipo_objetivo</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se han encontrado ningún Tipo Objetivo creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>
