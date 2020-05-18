@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Estructuras</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/estructura">Crear una nueva Estructura</a>
+        {% if estructuras %}
+            {% for estructura in estructuras %}
+                <h2>ID: {{estructura.id_Estructura}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{estructura.Str_Nombre}}</p>
+                <a href="/show/estructura/{{estructura.id_Estructura}}">para ver las estructuras</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se ha encontrado ningúna Estructura creada</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>

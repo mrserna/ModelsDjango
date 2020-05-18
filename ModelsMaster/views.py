@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ModelsMaster.models import Ambitos,TipoObjetivo
+from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo
 # Create your views here.
 
 def index(request):
@@ -92,4 +92,88 @@ def delete_tipo_objetivo(request,id):
     tipo_objetivo.bool_eliminado = True
     tipo_objetivo.save()
     eliminado = "El tipo objetivo se ha eliminado"
+
     return render(request, 'TipoObjetivo/index.html', {"eliminado":eliminado,"tipo_objetivo":tipo_objetivo})
+
+def index_estructura(request):
+    all = Estructura.objects.filter(bool_eliminado=False)
+    return render(request, 'Estructura/index.html', {"estructuras":all})
+
+def show_estructura(request,id):
+    estructura = Estructura.objects.get(id_Estructura=id)
+    return render(request, 'Estructura/show.html', {"estructura":estructura})
+
+def new_estructura(request):
+    return render(request, 'Estructura/new.html')
+
+def create_estructura(request):
+    nombre = request.POST['nombre']
+    estructura = Estructura(Str_Nombre=nombre)
+    estructura.save()
+    aviso = "La estructura se ha creado con éxito"
+    all = Estructura.objects.filter(bool_eliminado=False)
+
+    return render(request, 'Estructura/index.html', {"aviso":aviso, "estructuras":all})
+
+def edit_estructura(request,id):
+    estructura = Estructura.objects.get(id_Estructura=id)
+    return render(request, 'Estructura/edit.html', {"estructura":estructura})
+
+def update_estructura(request,id):
+    estructura = Estructura.objects.get(id_Estructura=id)
+    nombre = request.POST['nombre']
+    estructura.Str_Nombre = nombre
+    estructura.save()
+    aviso = "Los datos se han actualizado!"
+
+    return render(request, 'Estructura/edit.html', {"aviso":aviso, "estructura":estructura})
+
+def delete_estructura(request,id):
+    estructura = Estructura.objects.get(id_Estructura=id)
+    estructura.bool_eliminado = True
+    estructura.save()
+    eliminado = "El tipo objetivo se ha eliminado"
+    all = Estructura.objects.filter(bool_eliminado=False)
+
+    return render(request, 'Estructura/index.html', {"eliminado":eliminado, "estructuras":all})
+
+def index_riesgo(request):
+    all = Riesgo.objects.filter(bool_eliminado=False)
+    return render(request, 'Riesgo/index.html', {"riesgos":all})
+
+def show_riesgo(request,id):
+    riesgo = Riesgo.objects.get(id_Riesgo=id)
+    return render(request, 'Riesgo/show.html', {"riesgo":riesgo})
+
+def new_riesgo(request):
+    return render(request, 'Riesgo/new.html')
+
+def create_riesgo(request):
+    nombre = request.POST['nombre']
+
+    riesgo = Riesgo(Str_Nombre=nombre)
+    riesgo.save()
+    aviso = "El riesgo se ha creado con éxito"
+    all = Riesgo.objects.filter(bool_eliminado=False)
+    return render(request, 'Riesgo/index.html', {"aviso":aviso, "riesgos":all})
+
+def edit_riesgo(request,id):
+    riesgo = Riesgo.objects.get(id_Riesgo=id)
+    return render(request, 'Riesgo/edit.html', {"riesgo":riesgo})
+
+def update_riesgo(request,id):
+    riesgo = Riesgo.objects.get(id_Riesgo=id)
+    riesgo.Str_Nombre = request.POST['nombre']
+    riesgo.save()
+    aviso = "Los datos se han actualizado con éxito"
+    return render(request, 'Riesgo/edit.html', {"riesgo":riesgo, "aviso":aviso})
+
+def delete_riesgo(request,id):
+    riesgo = Riesgo.objects.get(id_Riesgo=id)
+    riesgo.bool_eliminado = True
+    riesgo.save()
+    all = Riesgo.objects.filter(bool_eliminado=False)
+    eliminado = "El riesgo se ha eliminado"
+    return render(request, 'Riesgo/index.html', {"eliminado":eliminado, "riesgos":all})
+
+

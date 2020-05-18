@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Riesgo</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/riesgo">Crear un nuevo riesgo</a>
+        {% if riesgos %}
+            {% for riesgo in riesgos %}
+                <h2>ID: {{riesgo.id_Riesgo}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{riesgo.Str_Nombre}}</p>
+                <a href="/show/riesgo/{{riesgo.id_Riesgo}}">para ver las estructuras</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se ha encontrado ningún Riesgo creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>

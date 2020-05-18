@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>edit Estructura</title>
+    </head>
+    <body>
+        <form action="/update/estructura/{{estructura.id_Estructura}}" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" value="{{estructura.Str_Nombre}}">
+        <input type="submit" value="Enviar">
+        </form>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        <a href="/show/estructura/{{estructura.id_Estructura}}">Volver atrás</a>
+    </body>
+</html>

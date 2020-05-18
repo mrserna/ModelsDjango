@@ -19,6 +19,7 @@ from ModelsMaster import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+
     path('new/ambito', views.new_ambito),
     path('create/ambito', views.create_ambito),
     path('index/ambito', views.index_ambito),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('edit/ambito/<int:id>',views.edit_ambito),
     path('update/ambito/<int:id>',views.update_ambito),
     path('delete/ambito/<int:id>',views.delete_ambito),
+
     path('index/tipo_objetivo', views.index_tipo_objetivo),
     path('show/tipo_objetivo/<int:id>', views.show_tipo_objetivo),
     path('new/tipo_objetivo', views.new_tipo_objetivo),
@@ -33,4 +35,20 @@ urlpatterns = [
     path('edit/tipo_objetivo/<int:id>', views.edit_tipo_objetivo),
     path('update/tipo_objetivo/<int:id>', views.update_tipo_objetivo),
     path('delete/tipo_objetivo/<int:id>', views.delete_tipo_objetivo),
+
+    path('index/estructura', views.index_estructura),
+    path('show/estructura/<int:id>', views.show_estructura),
+    path('new/estructura', views.new_estructura),
+    path('create/estructura', views.create_estructura),
+    path('edit/estructura/<int:id>', views.edit_estructura),
+    path('update/estructura/<int:id>', views.update_estructura),
+    path('delete/estructura/<int:id>', views.delete_estructura),
+
+    path('index/riesgo', views.index_riesgo),
+    path('show/riesgo/<int:id>', views.show_riesgo),
+    path('new/riesgo', views.new_riesgo),
+    path('create/riesgo', views.create_riesgo),
+    path('edit/riesgo/<int:id>', views.edit_riesgo),
+    path('update/riesgo/<int:id>', views.update_riesgo),
+    path('delete/riesgo/<int:id>', views.delete_riesgo),
 ]

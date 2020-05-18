@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>new Estructura</title>
+    </head>
+    <body>
+        <form action="/create/estructura" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre">
+        <input type="submit" value="Enviar">
+        </form>
+        <a href="/index/estructura">Volver atrás</a>
+    </body>
+</html>
