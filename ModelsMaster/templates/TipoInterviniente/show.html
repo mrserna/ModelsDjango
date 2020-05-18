@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>
+            Tipo Interviniente {{tipo_interviniente.Str_Nombre}}{{tipo_interviniente.id_Tipo_Interviniente}}
+        </title>
+    </head>
+    <body>
+        <h2>ID: {{tipo_interviniente.id_Tipo_Interviniente}}</h2>
+        <h2>Nombre:</h2>
+        <p>{{tipo_interviniente.Str_Nombre}}</p>
+        <br>
+        <a href="/edit/tipo_interviniente/{{tipo_interviniente.id_Tipo_Interviniente}}">Editar</a>
+        <a href="/delete/tipo_interviniente/{{tipo_interviniente.id_Tipo_Interviniente}}">Borrar</a>
+        <br>
+        <a href="/index/tipo_interviniente">Volver atrás</a>
+    </body>
+</html>

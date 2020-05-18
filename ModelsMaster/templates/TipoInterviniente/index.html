@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Tipo Interviniente</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/tipo_interviniente">Crear un nuevo tipo interviniente</a>
+        {% if tipo_intervinientes %}
+            {% for tipo_interviniente in tipo_intervinientes %}
+                <h2>ID: {{tipo_interviniente.id_Tipo_Interviniente}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{tipo_interviniente.Str_Nombre}}</p>
+                <a href="/show/tipo_interviniente/{{tipo_interviniente.id_Tipo_Interviniente}}">para ver los Tipos Intervinientes</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se ha encontrado ningún Tipo Interviniente creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>

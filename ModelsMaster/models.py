@@ -21,3 +21,8 @@ class Riesgo(models.Model):
     id_Riesgo=models.AutoField(primary_key=True)
     Str_Nombre=models.CharField(max_length=256)
     bool_eliminado=models.BooleanField(default=False)
+
+class TipoInterviniente(models.Model):
+    id_Tipo_Interviniente=models.AutoField(primary_key=True)
+    Str_Nombre=models.CharField(max_length=256)
+    bool_eliminado=models.BooleanField(default=False)

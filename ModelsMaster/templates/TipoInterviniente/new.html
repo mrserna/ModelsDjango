@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>new Tipo Interviniente</title>
+    </head>
+    <body>
+        <form action="/create/tipo_interviniente" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre">
+        <input type="submit" value="Enviar">
+        </form>
+        <a href="/index/tipo_interviniente">Volver atrás</a>
+    </body>
+</html>

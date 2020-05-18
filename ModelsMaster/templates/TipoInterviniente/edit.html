@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>edit Tipo Interviniente</title>
+    </head>
+    <body>
+        <form action="/update/tipo_interviniente/{{tipo_interviniente.id_Tipo_Interviniente}}" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" value="{{tipo_interviniente.Str_Nombre}}">
+        <input type="submit" value="Enviar">
+        </form>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        <a href="/show/tipo_interviniente/{{tipo_interviniente.id_Tipo_Interviniente}}">Volver atrás</a>
+    </body>
+</html>

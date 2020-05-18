@@ -44,11 +44,21 @@ urlpatterns = [
     path('update/estructura/<int:id>', views.update_estructura),
     path('delete/estructura/<int:id>', views.delete_estructura),
 
-    path('index/riesgo', views.index_riesgo),
+    path('index/riesgo', views.index_riesgo), 
     path('show/riesgo/<int:id>', views.show_riesgo),
     path('new/riesgo', views.new_riesgo),
     path('create/riesgo', views.create_riesgo),
     path('edit/riesgo/<int:id>', views.edit_riesgo),
     path('update/riesgo/<int:id>', views.update_riesgo),
     path('delete/riesgo/<int:id>', views.delete_riesgo),
+
+    path('index/tipo_interviniente', views.index_tipo_interviniente),
+    path('show/tipo_interviniente/<int:id>', views.show_tipo_interviniente),
+    path('new/tipo_interviniente', views.new_tipo_interviniente),
+    path('create/tipo_interviniente', views.create_tipo_interviniente),
+    path('edit/tipo_interviniente/<int:id>', views.edit_tipo_interviniente),
+    path('update/tipo_interviniente/<int:id>', views.update_tipo_interviniente),
+    path('delete/tipo_interviniente/<int:id>', views.delete_tipo_interviniente),
+
+
 ]

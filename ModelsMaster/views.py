@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo
+from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo,TipoInterviniente
 # Create your views here.
 
 def index(request):
@@ -176,4 +176,43 @@ def delete_riesgo(request,id):
     eliminado = "El riesgo se ha eliminado"
     return render(request, 'Riesgo/index.html', {"eliminado":eliminado, "riesgos":all})
 
+def index_tipo_interviniente(request):
+    all = TipoInterviniente.objects.filter(bool_eliminado=False)
+    return render(request, 'TipoInterviniente/index.html', {"tipo_intervinientes":all})
 
+def show_tipo_interviniente(request,id):
+    tipo_interviniente = TipoInterviniente.objects.get(id_Tipo_Interviniente=id)
+    return render(request, 'TipoInterviniente/show.html', {"tipo_interviniente":tipo_interviniente})
+
+def new_tipo_interviniente(request):
+    return render(request, 'TipoInterviniente/new.html')
+
+def create_tipo_interviniente(request):
+    nombre = request.POST['nombre']
+    tipo_interviniente = TipoInterviniente(Str_Nombre = nombre)
+    tipo_interviniente.save()
+    aviso = "El tipo interviniente se ha creado con éxito!"
+
+    all = TipoInterviniente.objects.filter(bool_eliminado=False)
+    return render(request, 'TipoInterviniente/index.html', {"aviso":aviso, "tipo_intervinientes":all})
+
+def edit_tipo_interviniente(request,id):
+    tipo_interviniente = TipoInterviniente.objects.get(id_Tipo_Interviniente=id)
+    return render(request, 'TipoInterviniente/edit.html', {"tipo_interviniente":tipo_interviniente})
+
+def update_tipo_interviniente(request,id):
+    tipo_interviniente = TipoInterviniente.objects.get(id_Tipo_Interviniente=id)
+    tipo_interviniente.Str_Nombre = request.POST['nombre']
+    tipo_interviniente.save()
+    aviso = "Los datos se han actualizado con éxito"
+
+    return render(request, 'TipoInterviniente/edit.html', {"aviso":aviso, "tipo_interviniente":tipo_interviniente})
+
+def delete_tipo_interviniente(request,id):
+    tipo_interviniente = TipoInterviniente.objects.get(id_Tipo_Interviniente=id)
+    tipo_interviniente.bool_eliminado = True
+    tipo_interviniente.save()
+    eliminado = "El tipo Interviniente se ha eliminado"
+    all = TipoInterviniente.objects.filter(bool_eliminado=False)
+
+    return render(request, 'TipoInterviniente/index.html', {"eliminado":eliminado, "tipo_intervinientes":all})
