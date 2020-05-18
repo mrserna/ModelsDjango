@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>new Ambito</title>
+    </head>
+    <body>
+        <form action="/create/ambito" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre">
+        <input type="text" name="descripcion">
+        <input type="submit" value="Enviar">
+        </form>
+        <a href="/index/ambito">Volver atrás</a>
+    </body>
+</html>

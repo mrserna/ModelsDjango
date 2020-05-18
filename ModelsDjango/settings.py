@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ModelsMaster',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'ModelsDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["D:\Documentos\A_Trabajo_Practicas\ProyectosDjango\ModelsDjango\ModelsMaster"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

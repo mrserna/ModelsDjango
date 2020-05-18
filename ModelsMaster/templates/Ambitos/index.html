@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Indice de ambitos</title>
+    </head>
+    <body>
+        {% if eliminado %}
+            <h2 style="color:red;">El ambito se ha eliminado</h2>
+        {% endif %}
+        <a href="/new/ambito">Crear un nuevo ambito</a>
+        {% if ambitos %}
+            {% for ambito in ambitos %}
+                <h2>ID: {{ambito.id_Ambito}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{ambito.Str_Nombre}}</p>
+                <a href="/show/ambito/{{ambito.id_Ambito}}">para ver el ambito</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se han encontrado ningún ambito creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>
