@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>
+            Sector {{nag.Str_NG_Nombre}}{{nag.id_Nivel_Area}}
+        </title>
+    </head>
+    <body>
+        <h2>ID: {{nag.id_Nivel_Area}}</h2>
+        <h2>Nombre:</h2>
+        <p>{{nag.Str_NG_Nombre}}</p>
+        <br>
+        <h2>Descripción:</h2>
+        {% if nag.Str_NG_Descripcion %}
+            <p>{{nag.Str_NG_Descripcion}}</p>
+        {% else %}
+            <p>No se ha encontrado la descripción del nag</p>
+        {% endif %}
+        <h2>Nivel Area:</h2>
+        <p>{{nag.Num_NG_Nivel}}</p>
+        <a href="/edit/nag/{{nag.id_Nivel_Area}}">Editar</a>
+        <a href="/delete/nag/{{nag.id_Nivel_Area}}">Borrar</a>
+        <br>
+        <a href="/index/nag">Volver atrás</a>
+    </body>
+</html>

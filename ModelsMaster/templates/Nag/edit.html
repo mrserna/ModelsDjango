@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>edit nag</title>
+    </head>
+    <body>
+        <form action="/update/nag/{{nag.id_Nivel_Area}}" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" value="{{nag.Str_NG_Nombre}}">
+        <input type="text" name="descripcion" value="{{nag.Str_NG_Descripcion}}">
+        <select name="nivel_area"> 
+            <option  value="1">1</option>
+            <option  value="2">2</option>
+            <option  value="3">3</option>
+            <option  value="4">4</option>
+            <option  value="5">5</option>
+            <option  value="6">6</option>
+            <option  value="7">7</option>
+            <option  value="8">8</option>
+            <option  value="9">9</option>
+            <option  value="10">10</option>
+        </select>
+        <input type="submit" value="Enviar">
+        </form>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        <a href="/show/nag/{{nag.id_Nivel_Area}}">Volver atrás</a>
+    </body>
+</html>

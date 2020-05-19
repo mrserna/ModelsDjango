@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Nivel Área Geográfica</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/nag">Crear un nuevo Nivel de Área geográfica</a>
+        {% if nags %}
+            {% for nag in nags %}
+                <h2>ID: {{nag.id_Nivel_Area}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{nag.Str_NG_Nombre}}</p>
+                <a href="/show/nag/{{nag.id_Nivel_Area}}">para ver los Nivel Área Geográfica</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se ha encontrado ningún Nivel de Área geográfica creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>

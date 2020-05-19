@@ -67,4 +67,12 @@ urlpatterns = [
     path('edit/sector/<int:id>', views.edit_sector),
     path('update/sector/<int:id>', views.update_sector),
     path('delete/sector/<int:id>', views.delete_sector),
+
+    path('index/nag', views.index_nag),
+    path('show/nag/<int:id>', views.show_nag),
+    path('new/nag', views.new_nag),
+    path('create/nag', views.create_nag),
+    path('edit/nag/<int:id>', views.edit_nag),
+    path('update/nag/<int:id>', views.update_nag),
+    path('delete/nag/<int:id>', views.delete_nag),
 ]

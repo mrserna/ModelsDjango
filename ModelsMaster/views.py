@@ -260,3 +260,47 @@ def delete_sector(request,id):
 
     return render(request, 'Sector/index.html', {"eliminado":eliminado, "sectores":all})
 
+def index_nag(request):
+    all = Nivel_Area_Geografica.objects.filter(bool_NG_Eliminado=False)
+    return render(request, 'Nag/index.html', {"nags":all})
+
+def show_nag(request,id):
+    nag = Nivel_Area_Geografica.objects.get(id_Nivel_Area=id)
+    return render(request, 'Nag/show.html', {"nag":nag})
+
+def new_nag(request):
+    return render(request, 'Nag/new.html')
+
+def create_nag(request):
+    nivel = request.POST.get('nivel_area')
+    nombre = request.POST['nombre']
+    descripcion = request.POST['descripcion']
+    nag = Nivel_Area_Geografica(Num_NG_Nivel=nivel,Str_NG_Nombre = nombre, Str_NG_Descripcion=descripcion)
+    nag.save()
+    aviso = "El Nivel de Área geográfica se ha creado con éxito!"
+
+    all = Nivel_Area_Geografica.objects.filter(bool_NG_Eliminado=False)
+    return render(request, 'Nag/index.html', {"aviso":aviso, "nags":all})
+
+def edit_nag(request,id):
+    nag = Nivel_Area_Geografica.objects.get(id_Nivel_Area=id)
+    return render(request, 'Nag/edit.html', {"nag":nag})
+
+def update_nag(request,id):
+    nag = Nivel_Area_Geografica.objects.get(id_Nivel_Area=id)
+    nag.Str_NG_Nombre = request.POST['nombre']
+    nag.Str_NG_Descripcion = request.POST['descripcion']
+    nag.Num_NG_Nivel = request.POST.get('nivel_area')
+    nag.save()
+    aviso = "Los datos se han actualizado con éxito"
+
+    return render(request, 'Nag/edit.html', {"aviso":aviso, "nag":nag})
+
+def delete_nag(request,id):
+    nag = Nivel_Area_Geografica.objects.get(id_Nivel_Area=id)
+    nag.bool_NG_Eliminado = True
+    nag.save()
+    eliminado = "El Nivel de Área geográfica se ha eliminado"
+    all = Nivel_Area_Geografica.objects.filter(bool_NG_Eliminado=False)
+
+    return render(request, 'Nag/index.html', {"eliminado":eliminado, "nags":all})
