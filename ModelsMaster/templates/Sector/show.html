@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>
+            Sector {{sector.Str_Sc_Nombre}}{{sector.id_Sector}}
+        </title>
+    </head>
+    <body>
+        <h2>ID: {{sector.id_Sector}}</h2>
+        <h2>Nombre:</h2>
+        <p>{{sector.Str_Sc_Nombre}}</p>
+        <br>
+        <h2>Descripción:</h2>
+        {% if sector.Str_Sc_Descripcion %}
+            <p>{{sector.Str_Sc_Descripcion}}</p>
+        {% else %}
+            <p>No se ha encontrado la descripción del sector</p>
+        {% endif %}
+        <a href="/edit/sector/{{sector.id_Sector}}">Editar</a>
+        <a href="/delete/sector/{{sector.id_Sector}}">Borrar</a>
+        <br>
+        <a href="/index/sector">Volver atrás</a>
+    </body>
+</html>

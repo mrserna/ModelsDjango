@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Indice de Sectores</title>
+    </head>
+    <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if eliminado %}
+            <h2 style="color:red;">{{eliminado}}</h2>
+        {% endif %}
+        <a href="/new/sector">Crear un nuevo sector</a>
+        {% if sectores %}
+            {% for sector in sectores %}
+                <h2>ID: {{sector.id_Sector}}</h2>
+                <h2>Nombre:</h2>
+                <p>{{sector.Str_Sc_Nombre}}</p>
+                <a href="/show/sector/{{sector.id_Sector}}">para ver los Tipos Intervinientes</a>
+            {% endfor %}
+        {% else %}
+            <h2>No se ha encontrado ningún Sector creado</h2>
+        {% endif %}
+        <br>
+        <br>
+        <a href="/">Volver atrás</a>
+    </body>
+</html>

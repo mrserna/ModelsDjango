@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo,TipoInterviniente
+from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo,TipoInterviniente,Sector,Nivel_Area_Geografica
 # Create your views here.
 
 def index(request):
@@ -216,3 +216,47 @@ def delete_tipo_interviniente(request,id):
     all = TipoInterviniente.objects.filter(bool_eliminado=False)
 
     return render(request, 'TipoInterviniente/index.html', {"eliminado":eliminado, "tipo_intervinientes":all})
+
+def index_sector(request):
+    all = Sector.objects.filter(bool_Sc_eliminado=False)
+    return render(request, 'Sector/index.html', {"sectores":all})
+
+def show_sector(request,id):
+    sector = Sector.objects.get(id_Sector=id)
+    return render(request, 'Sector/show.html', {"sector":sector})
+
+def new_sector(request):
+    return render(request, 'Sector/new.html')
+
+def create_sector(request):
+    nombre = request.POST['nombre']
+    descripcion = request.POST['descripcion']
+    sector = Sector(Str_Sc_Nombre = nombre, Str_Sc_Descripcion=descripcion)
+    sector.save()
+    aviso = "El sector se ha creado con éxito!"
+
+    all = Sector.objects.filter(bool_Sc_eliminado=False)
+    return render(request, 'Sector/index.html', {"aviso":aviso, "sectores":all})
+
+def edit_sector(request,id):
+    sector = Sector.objects.get(id_Sector=id)
+    return render(request, 'Sector/edit.html', {"sector":sector})
+
+def update_sector(request,id):
+    sector = Sector.objects.get(id_Sector=id)
+    sector.Str_Sc_Nombre = request.POST['nombre']
+    sector.Str_Sc_Descripcion = request.POST['descripcion']
+    sector.save()
+    aviso = "Los datos se han actualizado con éxito"
+
+    return render(request, 'Sector/edit.html', {"aviso":aviso, "sector":sector})
+
+def delete_sector(request,id):
+    sector = Sector.objects.get(id_Sector=id)
+    sector.bool_eliminado = True
+    sector.save()
+    eliminado = "El sector se ha eliminado"
+    all = Sector.objects.filter(bool_Sc_eliminado=False)
+
+    return render(request, 'Sector/index.html', {"eliminado":eliminado, "sectores":all})
+

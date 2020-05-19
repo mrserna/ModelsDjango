@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>edit sector</title>
+    </head>
+    <body>
+        <form action="/update/sector/{{sector.id_Sector}}" method="POST"> {% csrf_token %}
+        <input type="text" name="nombre" value="{{sector.Str_Sc_Nombre}}">
+        <input type="text" name="descripcion" value="{{sector.Str_Sc_Descripcion}}">
+        <input type="submit" value="Enviar">
+        </form>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        <a href="/show/sector/{{sector.id_Sector}}">Volver atrás</a>
+    </body>
+</html>

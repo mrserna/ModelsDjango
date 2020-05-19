@@ -60,5 +60,11 @@ urlpatterns = [
     path('update/tipo_interviniente/<int:id>', views.update_tipo_interviniente),
     path('delete/tipo_interviniente/<int:id>', views.delete_tipo_interviniente),
 
-
+    path('index/sector', views.index_sector),
+    path('show/sector/<int:id>', views.show_sector),
+    path('new/sector', views.new_sector),
+    path('create/sector', views.create_sector),
+    path('edit/sector/<int:id>', views.edit_sector),
+    path('update/sector/<int:id>', views.update_sector),
+    path('delete/sector/<int:id>', views.delete_sector),
 ]
