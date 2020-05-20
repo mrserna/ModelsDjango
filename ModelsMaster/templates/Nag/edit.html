@@ -20,6 +20,15 @@
         </select>
         <input type="submit" value="Enviar">
         </form>
+        {% if form.errors %}
+            {% for error_field, error_message in form.errors.items %}
+            <div class="alert alert-danger " role="alert">
+ 
+                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
+ 
+            </div> 
+            {% endfor %}
+        {% endif %}
         {% if aviso %}
             <h2 style="color:green;">{{aviso}}</h2>
         {% endif %}

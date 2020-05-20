@@ -1,81 +1,121 @@
-from django.shortcuts import render
-from ModelsMaster.models import Ambitos,TipoObjetivo,Estructura,Riesgo,TipoInterviniente,Sector,Nivel_Area_Geografica
+from django.shortcuts import render, redirect
+from django.views import View
+from .forms import AmbitoForm, TipoObjetivoForm
+from .models import Ambito,TipoObjetivo,Estructura,Riesgo,TipoInterviniente,Sector,Nivel_Area_Geografica
 # Create your views here.
-
 def index(request):
     return render(request, 'index.html')
 
-def index_ambito(request):
-    if Ambitos.objects.filter(bool_eliminado=False).exists():
-        all = Ambitos.objects.filter(bool_eliminado=False)
+class AmbitoView(View):
+    def index(request):
+        all = Ambito.objects.filter(bool_eliminado=False)
+        args = {"ambitos":all}
         return render(request, 'Ambitos/index.html', {"ambitos":all})
-    else:
-        return render(request, 'Ambitos/index.html')
 
-def show_ambito(request,id):
-    ambito = Ambitos.objects.get(id_Ambito=id)
-    return render(request, 'Ambitos/show.html', {"ambito":ambito})
-
-def new_ambito(request):
-    return render(request,'Ambitos/new.html')
-
-def create_ambito(request):
-    nombre = request.POST['nombre']
-    descripcion = request.POST['descripcion']
-
-    ambito=Ambitos(Str_Nombre=nombre,Str_Descripcion=descripcion)
-    ambito.save()
-
-    all = Ambitos.objects.filter(bool_eliminado=False)
-    return render(request, 'Ambitos/index.html', {"ambitos":all})
-
-def edit_ambito(request,id):
-    ambito = Ambitos.objects.get(id_Ambito=id)
-    return render(request, 'Ambitos/edit.html', {"ambito":ambito})
-
-def update_ambito(request,id):
-    nombre = request.POST["nombre"]
-    descripcion = request.POST['descripcion']
+    def show(request,id):
+        ambito = Ambito.objects.get(id_Ambito=id)
+        return render(request, 'Ambitos/show.html', {"ambito":ambito})
     
-    ambito = Ambitos.objects.get(id_Ambito=id)
-    ambito.Str_Nombre = nombre
-    ambito.Str_Descripcion = descripcion
-    ambito.save()
-    aviso = "Se han actualizado los datos"
-    return render(request, 'Ambitos/edit.html', {"aviso":aviso, "ambito":ambito})
+    def new(request):
+        return render(request,'Ambitos/new.html')
 
-def delete_ambito(request,id):
-    ambito = Ambitos.objects.get(id_Ambito=id)
-    ambito.bool_eliminado = True
-    ambito.save()
-    eliminado = "El ambito se ha eliminado"
-    return render(request, 'Ambitos/index.html', {"eliminado":eliminado,"ambito":ambito})
+    def create(request):
+        form = AmbitoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            all = Ambito.objects.filter(bool_eliminado=False)
+            args = {
+                "ambitos":all
+                }
+            return render(request, 'Ambitos/index.html', args )
+        else:
+            args = {
+                'form': form
+                }
+            return render (request, 'Ambitos/new.html', args )
 
-def index_tipo_objetivo(request):
-    all = TipoObjetivo.objects.filter(bool_eliminado=False)
-    return render(request, 'TipoObjetivo/index.html', {"tipos_objetivos":all})
+    def edit(request,id):
+        ambito = Ambito.objects.get(id_Ambito=id)
+        args = {
+            "ambito":ambito
+            }
+        return render(request, 'Ambitos/edit.html', args)
 
-def show_tipo_objetivo(request,id):
-    tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo = id)
-    return render(request, 'TipoObjetivo/show.html', {"tipo_objetivo":tipo_objetivo})
+    def update(request,id):
+        ambito = Ambito.objects.get(id_Ambito=id)
+        form = AmbitoForm(request.POST, instance=ambito)
+        if form.is_valid():
+            form.save()
+            aviso = "Se han actualizado los datos"
+            args = {
+                "aviso":aviso,
+                "form":form,
+                "ambito":ambito
+            }
+            return render(request, 'Ambitos/edit.html', args)
+        else:
+            ambito = Ambito.objects.get(id_Ambito=id)
+            args = {
+                "form":form,
+                "ambito":ambito
+            }
+            return render(request, 'Ambitos/edit.html',args)
 
-def new_tipo_objetivo(request):
-    return render(request, 'TipoObjetivo/new.html')
+    def delete(request,id):
+        ambito = Ambito.objects.get(id_Ambito=id)
+        ambito.bool_eliminado = True
+        ambito.save()
+        eliminado = "El ambito se ha eliminado"
+        all = Ambito.objects.filter(bool_eliminado=False)
+        args = {
+            "eliminado":eliminado,
+            "ambitos":all
+        }
+        return render(request, 'Ambitos/index.html', args)
 
-def create_tipo_objetivo(request):
-    nombre = request.POST['nombre']
+class TipoObjetivoView(View):
+    def index(request):
+        all = TipoObjetivo.objects.filter(bool_eliminado=False)
+        args = {
+            "tipos_objetivos":all
+        }
+        return render(request, 'TipoObjetivo/index.html', args)
 
-    tipo_objetivo = TipoObjetivo(Str_Nombre=nombre)
-    tipo_objetivo.save()
-    aviso = "El tipo objetivo se ha creado con éxito"
+    def show(request,id):
+        tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo = id)
+        args = {
+            "tipo_objetivo":tipo_objetivo
+        }
+        return render(request, 'TipoObjetivo/show.html', args)
 
-    all = TipoObjetivo.objects.filter(bool_eliminado=False)
-    return render(request, 'TipoObjetivo/index.html', {"aviso":aviso, "tipos_objetivos":all})
+    def new(request):
+        return render(request, 'TipoObjetivo/new.html')
 
-def edit_tipo_objetivo(request,id):
-    tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
+    def create(request):
+        form = TipoObjetivoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return
+            aviso = "El tipo objetivo se ha creado con éxito"
+            all = TipoObjetivo.objects.filter(bool_eliminado=False)
+            args = {
+                "aviso":aviso,
+                "tipo_objetivos":all
+            }
+            return render(request, 'TipoObjetivo/index.html', args)
+        else:
+            args = {
+                "form":form
+            }
+            return render(request, 'TipoObjetivo/new.html', args)
 
-    return render(request, 'TipoObjetivo/edit.html', {"tipo_objetivo":tipo_objetivo})
+    def edit(request,id):
+        tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
+        args = {
+            "tipo_objetivo":tipo_objetivo
+        }
+        return render(request, 'TipoObjetivo/edit.html', {"tipo_objetivo":tipo_objetivo})
+
 
 def update_tipo_objetivo(request,id):
     nombre = request.POST['nombre']

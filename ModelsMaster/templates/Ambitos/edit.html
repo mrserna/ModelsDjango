@@ -4,10 +4,24 @@
     </head>
     <body>
         <form action="/update/ambito/{{ambito.id_Ambito}}" method="POST"> {% csrf_token %}
-        <input type="text" name="nombre" value="{{ambito.Str_Nombre}}">
-        <input type="text" name="descripcion" value="{{ambito.Str_Descripcion}}">
+        <input type="text" name="Str_Nombre" value="{{ambito.Str_Nombre}}">
+        <input type="text" name="Str_Descripcion" value="
+        {% if ambito.Str_Descricion %}
+            {{ambito.Str_Descripcion}}
+            {%else%}
+            
+            {%endif%}">
         <input type="submit" value="Enviar">
         </form>
+        {% if form.errors %}
+            {% for error_field, error_message in form.errors.items %}
+            <div class="alert alert-danger " role="alert">
+ 
+                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
+ 
+            </div> 
+            {% endfor %}
+        {% endif %}
         {% if aviso %}
             <h2 style="color:green;">{{aviso}}</h2>
         {% endif %}
