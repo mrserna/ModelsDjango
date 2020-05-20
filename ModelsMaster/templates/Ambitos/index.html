@@ -3,6 +3,9 @@
         <title>Indice de ambitos</title>
     </head>
     <body>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}s
         {% if eliminado %}
             <h2 style="color:red;">El ambito se ha eliminado</h2>
         {% endif %}

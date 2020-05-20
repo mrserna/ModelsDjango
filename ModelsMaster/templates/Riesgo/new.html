@@ -4,9 +4,18 @@
     </head>
     <body>
         <form action="/create/riesgo" method="POST"> {% csrf_token %}
-        <input type="text" name="nombre">
+        <input type="text" name="Str_Nombre">
         <input type="submit" value="Enviar">
         </form>
+        {% if form.errors %}
+            {% for error_field, error_message in form.errors.items %}
+            <div class="alert alert-danger " role="alert">
+ 
+                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
+ 
+            </div> 
+            {% endfor %}
+        {% endif %}
         <a href="/index/riesgo">Volver atrás</a>
     </body>
 </html>

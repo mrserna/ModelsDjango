@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import AmbitoForm, TipoObjetivoForm
+from .forms import AmbitoForm, TipoObjetivoForm, EstructuraForm, RiesgoForm
 from .models import Ambito,TipoObjetivo,Estructura,Riesgo,TipoInterviniente,Sector,Nivel_Area_Geografica
 # Create your views here.
 def index(request):
@@ -23,8 +23,10 @@ class AmbitoView(View):
         form = AmbitoForm(request.POST)
         if form.is_valid():
             form.save()
+            aviso = "El ambito se ha creado con éxito"
             all = Ambito.objects.filter(bool_eliminado=False)
             args = {
+                "aviso":aviso,
                 "ambitos":all
                 }
             return render(request, 'Ambitos/index.html', args )
@@ -95,12 +97,11 @@ class TipoObjetivoView(View):
         form = TipoObjetivoForm(request.POST)
         if form.is_valid():
             form.save()
-            return
             aviso = "El tipo objetivo se ha creado con éxito"
             all = TipoObjetivo.objects.filter(bool_eliminado=False)
             args = {
                 "aviso":aviso,
-                "tipo_objetivos":all
+                "tipos_objetivos":all
             }
             return render(request, 'TipoObjetivo/index.html', args)
         else:
@@ -114,107 +115,181 @@ class TipoObjetivoView(View):
         args = {
             "tipo_objetivo":tipo_objetivo
         }
-        return render(request, 'TipoObjetivo/edit.html', {"tipo_objetivo":tipo_objetivo})
+        return render(request, 'TipoObjetivo/edit.html', args)
 
+    def update(request,id):
+        tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
+        form = TipoObjetivoForm(request.POST, instance = tipo_objetivo)
+        if form.is_valid():
+            form.save()
+            aviso = "Los datos se han actualizado!"
+            args = {
+                "aviso":aviso,
+                "form":form,
+                "tipo_objetivo":tipo_objetivo
+            }
+            return render(request, 'TipoObjetivo/edit.html', args)
+        else:
+            args = {
+                "form":form,
+                "tipo_objetivo":tipo_objetivo
+            }
+            return render(request, 'TipoObjetivo/edit.html', args)
 
-def update_tipo_objetivo(request,id):
-    nombre = request.POST['nombre']
+    def delete(request,id):
+        tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
+        tipo_objetivo.bool_eliminado = True
+        tipo_objetivo.save()
+        eliminado = "El tipo objetivo se ha eliminado"
+        all = TipoObjetivo.objects.filter(bool_eliminado=False)
+        args = {
+            "eliminado":eliminado,
+            "tipos_objetivos":all
+        }
+        return render(request, 'TipoObjetivo/index.html', args)
 
-    tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
-    tipo_objetivo.Str_Nombre = nombre
-    tipo_objetivo.save()
-    aviso = "Los datos se han actualizado!"
-    
-    return render(request, 'TipoObjetivo/edit.html', {"aviso":aviso, "tipo_objetivo":tipo_objetivo})
+class EstructuraView(View):
+    def index(request):
+        all = Estructura.objects.filter(bool_eliminado=False)
+        args = {
+            "estructuras":all
+        }
+        return render(request, 'Estructura/index.html', args)
 
-def delete_tipo_objetivo(request,id):
-    tipo_objetivo = TipoObjetivo.objects.get(id_Tipo_Objetivo=id)
-    tipo_objetivo.bool_eliminado = True
-    tipo_objetivo.save()
-    eliminado = "El tipo objetivo se ha eliminado"
+    def show(request,id):
+        estructura = Estructura.objects.get(id_Estructura=id)
+        args = {
+            "estructura":estructura
+        }
+        return render(request, 'Estructura/show.html', args)
 
-    return render(request, 'TipoObjetivo/index.html', {"eliminado":eliminado,"tipo_objetivo":tipo_objetivo})
+    def new(request):
+        return render(request, 'Estructura/new.html')
 
-def index_estructura(request):
-    all = Estructura.objects.filter(bool_eliminado=False)
-    return render(request, 'Estructura/index.html', {"estructuras":all})
+    def create(request):
+        form = EstructuraForm(request.POST)
+        if form.is_valid():
+            form.save()
+            aviso = "La estructura se ha creado con éxito"
+            all = Estructura.objects.filter(bool_eliminado=False)
+            args = {
+                "aviso":aviso,
+                "estructuras":all
+            }
+            return render(request, 'Estructura/index.html', args)
+        else:
+            args = {
+                "form":form
+            }
+            return render(request, 'Estructura/new.html', args)
 
-def show_estructura(request,id):
-    estructura = Estructura.objects.get(id_Estructura=id)
-    return render(request, 'Estructura/show.html', {"estructura":estructura})
+    def edit(request,id):
+        estructura = Estructura.objects.get(id_Estructura=id)
+        args = {
+            "estructura": estructura
+        }
+        return render(request, 'Estructura/edit.html', args)
 
-def new_estructura(request):
-    return render(request, 'Estructura/new.html')
+    def update(request,id):
+        estructura = Estructura.objects.get(id_Estructura=id)
+        form = EstructuraForm(request.POST, instance=estructura)
+        if form.is_valid():
+            form.save()
+            aviso = "Los datos se han actualizado!"
+            args = {
+                "aviso":aviso,
+                "estructura":estructura
+            }
+            return render(request, 'Estructura/edit.html', args)
+        else:
+            args = {
+                "form":form
+            }
+            return render(request, 'Estructura/edit.html', args)
 
-def create_estructura(request):
-    nombre = request.POST['nombre']
-    estructura = Estructura(Str_Nombre=nombre)
-    estructura.save()
-    aviso = "La estructura se ha creado con éxito"
-    all = Estructura.objects.filter(bool_eliminado=False)
+    def delete(request,id):
+        estructura = Estructura.objects.get(id_Estructura=id)
+        estructura.bool_eliminado = True
+        estructura.save()
+        eliminado = "El tipo objetivo se ha eliminado"
+        all = Estructura.objects.filter(bool_eliminado=False)
+        args = {
+            "eliminado":eliminado,
+            "estructuras":all
+        }
+        return render(request, 'Estructura/index.html', args)
 
-    return render(request, 'Estructura/index.html', {"aviso":aviso, "estructuras":all})
+class RiesgoView(View):
+    def index(request):
+        all = Riesgo.objects.filter(bool_eliminado=False)
+        args = {
+            "riesgos":all
+        }
+        return render(request, 'Riesgo/index.html', args)
 
-def edit_estructura(request,id):
-    estructura = Estructura.objects.get(id_Estructura=id)
-    return render(request, 'Estructura/edit.html', {"estructura":estructura})
+    def show(request,id):
+        riesgo = Riesgo.objects.get(id_Riesgo=id)
+        args = {
+            "riesgo":riesgo
+        }
+        return render(request, 'Riesgo/show.html', args)
 
-def update_estructura(request,id):
-    estructura = Estructura.objects.get(id_Estructura=id)
-    nombre = request.POST['nombre']
-    estructura.Str_Nombre = nombre
-    estructura.save()
-    aviso = "Los datos se han actualizado!"
+    def new(request):
+        return render(request, 'Riesgo/new.html')
 
-    return render(request, 'Estructura/edit.html', {"aviso":aviso, "estructura":estructura})
+    def create(request):
+        form = RiesgoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            aviso = "El riesgo se ha creado con éxito"
+            all = Riesgo.objects.filter(bool_eliminado=False)
+            args = {
+                "aviso":aviso,
+                "riesgos":all
+            }
+            return render(request, 'Riesgo/index.html', args)
+        else:
+            args = {
+                "form":form
+            }
+            return render(request, 'Riesgo/new.html', args)
 
-def delete_estructura(request,id):
-    estructura = Estructura.objects.get(id_Estructura=id)
-    estructura.bool_eliminado = True
-    estructura.save()
-    eliminado = "El tipo objetivo se ha eliminado"
-    all = Estructura.objects.filter(bool_eliminado=False)
+    def edit(request,id):
+        riesgo = Riesgo.objects.get(id_Riesgo=id)
+        args = {
+            "riesgo":riesgo
+        }
+        return render(request, 'Riesgo/edit.html', args)
 
-    return render(request, 'Estructura/index.html', {"eliminado":eliminado, "estructuras":all})
+    def update(request,id):
+        riesgo = Riesgo.objects.get(id_Riesgo=id)
+        form = RiesgoForm(request.POST, instance=riesgo)
+        if form.is_valid():
+            form.save()
+            aviso = "Los datos se han actualizado con éxito"
+            args = {
+                "aviso":aviso,
+                "riesgo":riesgo
+            }
+            return render(request, 'Riesgo/edit.html', args)
+        else:
+            args = {
+                "riesgo":riesgo,
+                "form":form
+            }
+            return render(request, 'Riesgo/edit.html', args)
 
-def index_riesgo(request):
-    all = Riesgo.objects.filter(bool_eliminado=False)
-    return render(request, 'Riesgo/index.html', {"riesgos":all})
-
-def show_riesgo(request,id):
-    riesgo = Riesgo.objects.get(id_Riesgo=id)
-    return render(request, 'Riesgo/show.html', {"riesgo":riesgo})
-
-def new_riesgo(request):
-    return render(request, 'Riesgo/new.html')
-
-def create_riesgo(request):
-    nombre = request.POST['nombre']
-
-    riesgo = Riesgo(Str_Nombre=nombre)
-    riesgo.save()
-    aviso = "El riesgo se ha creado con éxito"
-    all = Riesgo.objects.filter(bool_eliminado=False)
-    return render(request, 'Riesgo/index.html', {"aviso":aviso, "riesgos":all})
-
-def edit_riesgo(request,id):
-    riesgo = Riesgo.objects.get(id_Riesgo=id)
-    return render(request, 'Riesgo/edit.html', {"riesgo":riesgo})
-
-def update_riesgo(request,id):
-    riesgo = Riesgo.objects.get(id_Riesgo=id)
-    riesgo.Str_Nombre = request.POST['nombre']
-    riesgo.save()
-    aviso = "Los datos se han actualizado con éxito"
-    return render(request, 'Riesgo/edit.html', {"riesgo":riesgo, "aviso":aviso})
-
-def delete_riesgo(request,id):
-    riesgo = Riesgo.objects.get(id_Riesgo=id)
-    riesgo.bool_eliminado = True
-    riesgo.save()
-    all = Riesgo.objects.filter(bool_eliminado=False)
-    eliminado = "El riesgo se ha eliminado"
-    return render(request, 'Riesgo/index.html', {"eliminado":eliminado, "riesgos":all})
+    def delete(request,id):
+        riesgo = Riesgo.objects.get(id_Riesgo=id)
+        riesgo.bool_eliminado = True
+        riesgo.save()
+        all = Riesgo.objects.filter(bool_eliminado=False)
+        eliminado = "El riesgo se ha eliminado"
+        args = {
+            "eliminado":eliminado,
+            "riesgos":all
+        }
+        return render(request, 'Riesgo/index.html', args)
 
 def index_tipo_interviniente(request):
     all = TipoInterviniente.objects.filter(bool_eliminado=False)
