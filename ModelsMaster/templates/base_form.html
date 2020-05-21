@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        {% block head %}
+
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+        {% block body %}
+
+        {% endblock %}
+        </div>
+        {% if aviso %}
+            <h2 style="color:green;">{{aviso}}</h2>
+        {% endif %}
+        {% if form.errors %}
+            {% for error_field, error_message in form.errors.items %}
+            <div class="alert alert-danger " role="alert">
+
+                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
+
+            </div> 
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>

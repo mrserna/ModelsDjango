@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 #from .views import *
 from . import views
 urlpatterns = [
@@ -35,27 +36,29 @@ urlpatterns = [
     path('update/riesgo/<int:id>', views.RiesgoView.update),
     path('delete/riesgo/<int:id>', views.RiesgoView.delete),
 
-    path('index/tipo_interviniente', views.index_tipo_interviniente),
-    path('show/tipo_interviniente/<int:id>', views.show_tipo_interviniente),
-    path('new/tipo_interviniente', views.new_tipo_interviniente),
-    path('create/tipo_interviniente', views.create_tipo_interviniente),
-    path('edit/tipo_interviniente/<int:id>', views.edit_tipo_interviniente),
-    path('update/tipo_interviniente/<int:id>', views.update_tipo_interviniente),
-    path('delete/tipo_interviniente/<int:id>', views.delete_tipo_interviniente),
+    path('index/tipo_interviniente', views.TipoIntervinienteView.index),
+    path('show/tipo_interviniente/<int:id>', views.TipoIntervinienteView.show),
+    path('new/tipo_interviniente', views.TipoIntervinienteView.new),
+    path('create/tipo_interviniente', views.TipoIntervinienteView.create),
+    path('edit/tipo_interviniente/<int:id>', views.TipoIntervinienteView.edit),
+    path('update/tipo_interviniente/<int:id>', views.TipoIntervinienteView.update),
+    path('delete/tipo_interviniente/<int:id>', views.TipoIntervinienteView.delete),
 
-    path('index/sector', views.index_sector),
-    path('show/sector/<int:id>', views.show_sector),
-    path('new/sector', views.new_sector),
-    path('create/sector', views.create_sector),
-    path('edit/sector/<int:id>', views.edit_sector),
-    path('update/sector/<int:id>', views.update_sector),
-    path('delete/sector/<int:id>', views.delete_sector),
+    path('index/sector', views.SectorView.index),
+    path('show/sector/<int:id>', views.SectorView.show),
+    path('new/sector', views.SectorView.new),
+    path('create/sector', views.SectorView.create),
+    path('edit/sector/<int:id>', views.SectorView.edit),
+    path('update/sector/<int:id>', views.SectorView.update),
+    path('delete/sector/<int:id>', views.SectorView.delete),
 
-    path('index/nag', views.index_nag),
-    path('show/nag/<int:id>', views.show_nag),
-    path('new/nag', views.new_nag),
-    path('create/nag', views.create_nag),
-    path('edit/nag/<int:id>', views.edit_nag),
-    path('update/nag/<int:id>', views.update_nag),
-    path('delete/nag/<int:id>', views.delete_nag),
+    path('index/nag', views.NivelAreaGeograficaView.index),
+    path('show/nag/<int:id>', views.NivelAreaGeograficaView.show),
+    path('new/nag', views.NivelAreaGeograficaView.new),
+    path('create/nag', views.NivelAreaGeograficaView.create),
+    path('edit/nag/<int:id>', views.NivelAreaGeograficaView.edit),
+    path('update/nag/<int:id>', views.NivelAreaGeograficaView.update),
+    path('delete/nag/<int:id>', views.NivelAreaGeograficaView.delete),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

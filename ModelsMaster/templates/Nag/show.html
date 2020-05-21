@@ -1,24 +1,24 @@
 <html>
     <head>
         <title>
-            Sector {{nag.Str_NG_Nombre}}{{nag.id_Nivel_Area}}
+            Sector {{nag.str_nag_nombre}}{{nag.id_nag}}
         </title>
     </head>
     <body>
-        <h2>ID: {{nag.id_Nivel_Area}}</h2>
+        <h2>ID: {{nag.id_nag}}</h2>
         <h2>Nombre:</h2>
-        <p>{{nag.Str_NG_Nombre}}</p>
+        <p>{{nag.str_nag_nombre}}</p>
         <br>
         <h2>Descripción:</h2>
-        {% if nag.Str_NG_Descripcion %}
-            <p>{{nag.Str_NG_Descripcion}}</p>
+        {% if nag.str_nag_descripcion %}
+            <p>{{nag.str_nag_descripcion}}</p>
         {% else %}
             <p>No se ha encontrado la descripción del nag</p>
         {% endif %}
         <h2>Nivel Area:</h2>
-        <p>{{nag.Num_NG_Nivel}}</p>
-        <a href="/edit/nag/{{nag.id_Nivel_Area}}">Editar</a>
-        <a href="/delete/nag/{{nag.id_Nivel_Area}}">Borrar</a>
+        <p>{{nag.num_nag_nivel}}</p>
+        <a href="/edit/nag/{{nag.id_nag}}">Editar</a>
+        <a href="/delete/nag/{{nag.id_nag}}">Borrar</a>
         <br>
         <a href="/index/nag">Volver atrás</a>
     </body>

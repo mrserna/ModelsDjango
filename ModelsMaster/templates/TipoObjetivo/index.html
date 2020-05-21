@@ -1,27 +1,34 @@
-<html>
-    <head>
+{% extends '../base_index.html' %}
+    {% block head %}
         <title>Indice de Tipo Objetivo</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        {% if eliminado %}
-            <h2 style="color:red;">{{eliminado}}</h2>
-        {% endif %}
-        <a href="/new/tipo_objetivo">Crear un nuevo Tipo objetivo</a>
+    {% endblock %}
+   
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/tipo_objetivo">Crear nuevo Tipo Objetivo</a>
+    {% endblock %}
+    {% block tbody %}
         {% if tipos_objetivos %}
             {% for tipo_objetivo in tipos_objetivos %}
-                <h2>ID: {{tipo_objetivo.id_Tipo_Objetivo}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{tipo_objetivo.Str_Nombre}}</p>
-                <a href="/show/tipo_objetivo/{{tipo_objetivo.id_Tipo_Objetivo}}">para ver el tipo_objetivo</a>
+            <tr>
+                <td>{{tipo_objetivo.id_to}}</td>
+                <td>{{tipo_objetivo.str_to_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/tipo_objetivo/{{tipo_objetivo.id_to}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/tipo_objetivo/{{tipo_objetivo.id_to}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/tipo_objetivo/{{tipo_objetivo.id_to}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{tipo_interviniente.id_ti}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{tipo_interviniente.id_ti}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{tipo_interviniente.id_ti}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
-            <h2>No se han encontrado ningún Tipo Objetivo creado</h2>
+            <h2>No se han encontrado ningún tipo Objetivo creado</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}

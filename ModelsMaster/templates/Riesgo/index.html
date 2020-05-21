@@ -1,27 +1,34 @@
-<html>
-    <head>
-        <title>Indice de Riesgo</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        {% if eliminado %}
-            <h2 style="color:red;">{{eliminado}}</h2>
-        {% endif %}
-        <a href="/new/riesgo">Crear un nuevo riesgo</a>
+{% extends '../base_index.html' %}
+    {% block head %}
+        <title>Indice de Riesgos</title>
+    {% endblock %}
+   
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/riesgo">Crear nuevo Riesgo</a>
+    {% endblock %}
+    {% block tbody %}
         {% if riesgos %}
             {% for riesgo in riesgos %}
-                <h2>ID: {{riesgo.id_Riesgo}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{riesgo.Str_Nombre}}</p>
-                <a href="/show/riesgo/{{riesgo.id_Riesgo}}">para ver las estructuras</a>
+            <tr>
+                <td>{{riesgo.id_rg}}</td>
+                <td>{{riesgo.str_rg_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/riesgo/{{riesgo.id_rg}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/riesgo/{{riesgo.id_rg}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/riesgo/{{riesgo.id_rg}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{riesgo.id_rg}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{riesgo.id_rg}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{riesgo.id_rg}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
-            <h2>No se ha encontrado ningún Riesgo creado</h2>
+            <h2>No se han encontrado ningún riesgo creado</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}

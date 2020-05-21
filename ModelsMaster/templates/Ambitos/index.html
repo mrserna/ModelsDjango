@@ -1,27 +1,34 @@
-<html>
-    <head>
+{% extends '../base_index.html' %}
+    {% block head %}
         <title>Indice de ambitos</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}s
-        {% if eliminado %}
-            <h2 style="color:red;">El ambito se ha eliminado</h2>
-        {% endif %}
-        <a href="/new/ambito">Crear un nuevo ambito</a>
+    {% endblock %}
+   
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/ambito">Crear nuevo Ambito</a>
+    {% endblock %}
+    {% block tbody %}
         {% if ambitos %}
             {% for ambito in ambitos %}
-                <h2>ID: {{ambito.id_Ambito}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{ambito.Str_Nombre}}</p>
-                <a href="/show/ambito/{{ambito.id_Ambito}}">para ver el ambito</a>
+            <tr>
+                <td>{{ambito.id_am}}</td>
+                <td>{{ambito.str_am_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/ambito/{{ambito.id_am}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/ambito/{{ambito.id_am}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/ambito/{{ambito.id_am}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{ambito.id_am}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{ambito.id_am}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{ambito.id_am}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
             <h2>No se han encontrado ningún ambito creado</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}

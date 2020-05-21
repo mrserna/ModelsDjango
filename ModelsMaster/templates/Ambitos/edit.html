@@ -1,30 +1,15 @@
-<html>
-    <head>
+{% extends '../base_form.html' %}
+    {% block head%}
         <title>edit Ambito</title>
-    </head>
-    <body>
-        <form action="/update/ambito/{{ambito.id_Ambito}}" method="POST"> {% csrf_token %}
-        <input type="text" name="Str_Nombre" value="{{ambito.Str_Nombre}}">
-        <input type="text" name="Str_Descripcion" value="
-        {% if ambito.Str_Descricion %}
-            {{ambito.Str_Descripcion}}
-            {%else%}
-            
-            {%endif%}">
-        <input type="submit" value="Enviar">
+    {% endblock %}
+    {% block body %}
+        <form action="/update/ambito/{{ambito.id_am}}" method="POST"> {% csrf_token %}
+            <input type="text" name="str_am_nombre" value="{{ambito.str_am_nombre}}">
+            <input type="text" name="str_am_descripcion" value="
+            {% if ambito.str_am_descripcion %}
+                {{ambito.str_am_descripcion}}
+                {%endif%}">
+            <input type="submit" value="Enviar">
         </form>
-        {% if form.errors %}
-            {% for error_field, error_message in form.errors.items %}
-            <div class="alert alert-danger " role="alert">
- 
-                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
- 
-            </div> 
-            {% endfor %}
-        {% endif %}
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        <a href="/show/ambito/{{ambito.id_Ambito}}">Volver atrás</a>
-    </body>
-</html>
+        <a href="/show/ambito/{{ambito.id_am}}">Volver atrás</a>
+    {% endblock%}

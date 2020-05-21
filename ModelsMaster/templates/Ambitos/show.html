@@ -1,22 +1,22 @@
 <html>
     <head>
         <title>
-            Ambito {{ambito.Str_Nombre}}/{{ambito.id_Ambito}}
+            Ambito {{ambito.str_am_nombre}}/{{ambito.id_am}}
         </title>
     </head>
     <body>
-        <h2>ID: {{ambito.id_Ambito}}</h2>
+        <h2>ID: {{ambito.id_am}}</h2>
         <h2>Nombre:</h2>
-        <p>{{ambito.Str_Nombre}}</p>
+        <p>{{ambito.str_am_nombre}}</p>
         <br>
         <h2>Descripción:</h2>
-        {% if ambito.Str_Descripcion %}
-            <p>{{ambito.Str_Descripcion}}</p>
+        {% if ambito.str_am_descripcion %}
+            <p>{{ambito.str_am_descripcion}}</p>
         {% else %}
             <p>No se ha encontrado descripción del ámbito</p>
         {% endif %}
-        <a href="/edit/ambito/{{ambito.id_Ambito}}">Editar</a>
-        <a href="/delete/ambito/{{ambito.id_Ambito}}">Borrar</a>
+        <a href="/edit/ambito/{{ambito.id_am}}">Editar</a>
+        <a href="/delete/ambito/{{ambito.id_am}}">Borrar</a>
         <a href="/index/ambito">Volver atrás</a>
     </body>
 </html>

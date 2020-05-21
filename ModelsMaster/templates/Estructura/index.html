@@ -1,27 +1,34 @@
-<html>
-    <head>
-        <title>Indice de Estructuras</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        {% if eliminado %}
-            <h2 style="color:red;">{{eliminado}}</h2>
-        {% endif %}
-        <a href="/new/estructura">Crear una nueva Estructura</a>
+{% extends '../base_index.html' %}
+    {% block head %}
+        <title>Indice de Estructura</title>
+    {% endblock %}
+   
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/estructura">Crear nueva Estructura</a>
+    {% endblock %}
+    {% block tbody %}
         {% if estructuras %}
             {% for estructura in estructuras %}
-                <h2>ID: {{estructura.id_Estructura}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{estructura.Str_Nombre}}</p>
-                <a href="/show/estructura/{{estructura.id_Estructura}}">para ver las estructuras</a>
+            <tr>
+                <td>{{estrcutura.id_est}}</td>
+                <td>{{estructura.str_est_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/estructura/{{estructura.id_est}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/estructura/{{estructura.id_est}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/estructura/{{estructura.id_est}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{estructura.id_est}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{estructura.id_est}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{estructura.id_est}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
-            <h2>No se ha encontrado ningúna Estructura creada</h2>
+            <h2>No se han encontrado ninguna estrucutra creada</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}

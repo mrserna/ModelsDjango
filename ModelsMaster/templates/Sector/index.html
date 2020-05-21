@@ -1,27 +1,34 @@
-<html>
-    <head>
+{% extends '../base_index.html' %}
+    {% block head %}
         <title>Indice de Sectores</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        {% if eliminado %}
-            <h2 style="color:red;">{{eliminado}}</h2>
-        {% endif %}
-        <a href="/new/sector">Crear un nuevo sector</a>
+    {% endblock %}
+   
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/sector">Crear nuevo Sector</a>
+    {% endblock %}
+    {% block tbody %}
         {% if sectores %}
             {% for sector in sectores %}
-                <h2>ID: {{sector.id_Sector}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{sector.Str_Sc_Nombre}}</p>
-                <a href="/show/sector/{{sector.id_Sector}}">para ver los Tipos Intervinientes</a>
+            <tr>
+                <td>{{sector.id_sc}}</td>
+                <td>{{sector.str_sc_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/sector/{{sector.id_sc}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/sector/{{sector.id_sc}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/sector/{{sector.id_sc}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{sector.id_sc}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{sector.id_sc}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{sector.id_sc}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
-            <h2>No se ha encontrado ningún Sector creado</h2>
+            <h2>No se han encontrado ningún Sector creado</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}

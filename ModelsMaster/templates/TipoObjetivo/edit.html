@@ -1,24 +1,11 @@
-<html>
-    <head>
-        <title>edit Tipo objetivo</title>
-    </head>
-    <body>
-        <form action="/update/tipo_objetivo/{{tipo_objetivo.id_Tipo_Objetivo}}" method="POST"> {% csrf_token %}
-        <input type="text" name="Str_Nombre" value="{{tipo_objetivo.Str_Nombre}}">
-        <input type="submit" value="Enviar">
+{% extends '../base_form.html' %}
+    {% block head%}
+        <title>edit TIpo Objetivo</title>
+    {% endblock %}
+    {% block body %}
+        <form action="/update/tipo_objetivo/{{tipo_objetivo.id_to}}" method="POST"> {% csrf_token %}
+            <input type="text" name="str_to_nombre" value="{{tipo_objetivo.str_to_nombre}}">
+            <input type="submit" value="Enviar">
         </form>
-        {% if form.errors %}
-            {% for error_field, error_message in form.errors.items %}
-            <div class="alert alert-danger " role="alert">
- 
-                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
- 
-            </div> 
-            {% endfor %}
-        {% endif %}
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        <a href="/show/tipo_objetivo/{{tipo_objetivo.id_Tipo_Objetivo}}">Volver atrás</a>
-    </body>
-</html>
+        <a href="/show/tipo_objetivo/{{tipo_objetivo.id_to}}">Volver atrás</a>
+    {% endblock %}

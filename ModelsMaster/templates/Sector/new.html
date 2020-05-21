@@ -1,13 +1,12 @@
-<html>
-    <head>
+{% extends '../base_form.html '%}
+    {% block head %}
         <title>new Sector</title>
-    </head>
-    <body>
+    {%endblock%}
+    {% block body %}
         <form action="/create/sector" method="POST"> {% csrf_token %}
-        <input type="text" name="nombre">
-        <input type="text" name="descripcion">
+        <input type="text" name="str_sc_nombre">
+        <input type="text" name="str_sc_descripcion">
         <input type="submit" value="Enviar">
         </form>
         <a href="/index/sector">Volver atrás</a>
-    </body>
-</html>
+    {%endblock%}

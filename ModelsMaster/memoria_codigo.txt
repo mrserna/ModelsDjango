@@ -1,0 +1,17 @@
+{% if ambitos %}
+    {% for ambito in ambitos %}
+        <h2>ID: {{ambito.id_Ambito}}</h2>
+        <h2>Nombre:</h2>
+        <p>{{ambito.Str_Nombre}}</p>
+        <a href="/show/ambito/{{ambito.id_Ambito}}">para ver el ambito</a>
+    {% endfor %}
+{% else %}
+
+{% if aviso %}
+    <h2 style="color:green;">{{aviso}}</h2>
+{% endif %}
+{% if eliminado %}
+    <h2 style="color:red;">{{eliminado}}</h2>
+{% endif %}
+<a href="/new/ambito">Crear un nuevo ambito</a>
+<br>

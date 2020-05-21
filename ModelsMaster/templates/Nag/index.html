@@ -1,27 +1,35 @@
-<html>
-    <head>
-        <title>Indice de Nivel Área Geográfica</title>
-    </head>
-    <body>
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        {% if eliminado %}
-            <h2 style="color:red;">{{eliminado}}</h2>
-        {% endif %}
-        <a href="/new/nag">Crear un nuevo Nivel de Área geográfica</a>
+{% extends '../base_index.html' %}
+    {% block head %}
+        <title>Indice de Nivel Áreas Geográficas</title>
+    {% endblock %}
+    
+    {% block thead %}
+    <th> ID: </th>
+    <th> Nombre:</th>
+    <th> Ver:</th>
+    <th> Editar:</th>
+    <th> Eliminar:</th>
+    {% endblock %}
+    {% block body %}
+    <a href="/new/nag">Crear nuevo Nivel Area Geográfica</a>
+    {% endblock %}
+    {% block tbody %}
         {% if nags %}
             {% for nag in nags %}
-                <h2>ID: {{nag.id_Nivel_Area}}</h2>
-                <h2>Nombre:</h2>
-                <p>{{nag.Str_NG_Nombre}}</p>
-                <a href="/show/nag/{{nag.id_Nivel_Area}}">para ver los Nivel Área Geográfica</a>
+            <tr>
+                <td>{{nag.id_nag}}</td>
+                <td>{{nag.str_nag_nombre}}</td>
+                <td><a class="btn btn-xs glyphicon glyphicon-eye-open" href="/show/nag/{{nag.id_nag}}"></a></td>
+                <td><a class="btn btn-primary btn-xs glyphicon glyphicon-pencil" href="/edit/nag/{{nag.id_nag}}"></a></td>
+                <td><a class="btn btn-danger btn-xs glyphicon glyphicon-trash" href="/delete/nag/{{nag.id_nag}}"></a></td>
+                
+                <!--<td><a href="/show/ambito/{{nag.id_nag}}">Ver</a></td>
+                <td><a href="/edit/ambito/{{nag.id_nag}}">Editar</a></td>
+                <td><a href="/delete/ambito/{{nag.id_nag}}">Eliminar</a></td>-->
+            </tr>
             {% endfor %}
         {% else %}
-            <h2>No se ha encontrado ningún Nivel de Área geográfica creado</h2>
+            <h2>No se han encontrado ningún Nivel de Áreas geográficas creado</h2>
         {% endif %}
-        <br>
-        <br>
-        <a href="/">Volver atrás</a>
-    </body>
-</html>
+    {% endblock %}
+    

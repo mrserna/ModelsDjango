@@ -1,25 +1,14 @@
-<html>
-    <head>
+{% extends '../base_form.html' %}
+    {% block head %}
         <title>new Ambito</title>
-
-    </head>
-    <body>
+    {% endblock %}
+    {% block body %}
         <form action="/create/ambito" method="POST"> {% csrf_token %}
-        <input type="text" name="Str_Nombre">
-        <input type="text" name="Str_Descripcion">
+        <input type="text" name="str_am_nombre">
+        <input type="text" name="str_am_descripcion">
         <input type="submit" value="Enviar">
         </form>
         <a href="/index/ambito">Volver atrás</a>
         <br>
         </form>
-        {% if form.errors %}
-            {% for error_field, error_message in form.errors.items %}
-            <div class="alert alert-danger " role="alert">
- 
-                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
- 
-            </div> 
-            {% endfor %}
-        {% endif %}
-    </body>
-</html>
+    {% endblock %}

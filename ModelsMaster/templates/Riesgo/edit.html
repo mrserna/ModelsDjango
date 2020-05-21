@@ -1,24 +1,11 @@
-<html>
-    <head>
+{% extends '../base_form.html' %}
+    {% block head %}
         <title>edit Riesgo</title>
-    </head>
-    <body>
-        <form action="/update/riesgo/{{riesgo.id_Riesgo}}" method="POST"> {% csrf_token %}
-        <input type="text" name="Str_Nombre" value="{{riesgo.Str_Nombre}}">
+    {% endblock %}
+    {% block body %}
+        <form action="/update/riesgo/{{riesgo.id_rg}}" method="POST"> {% csrf_token %}
+        <input type="text" name="str_rg_nombre" value="{{riesgo.str_rg_nombre}}">
         <input type="submit" value="Enviar">
         </form>
-        {% if form.errors %}
-            {% for error_field, error_message in form.errors.items %}
-            <div class="alert alert-danger " role="alert">
- 
-                <p> {{ error_field|striptags }}-{{ error_message|striptags }}</p>
- 
-            </div> 
-            {% endfor %}
-        {% endif %}
-        {% if aviso %}
-            <h2 style="color:green;">{{aviso}}</h2>
-        {% endif %}
-        <a href="/show/riesgo/{{riesgo.id_Riesgo}}">Volver atrás</a>
-    </body>
-</html>
+        <a href="/show/riesgo/{{riesgo.id_rg}}">Volver atrás</a>
+    {% endblock %}
